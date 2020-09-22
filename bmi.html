@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI Calculation</title>
+	<script type="text/javascript" src="vue.min.js"></script>
+	<!-- <script type="text/javascript" src="jquery.min.js"></script> -->
+</head>
+<body>
+	<fieldset style="background-color: gray;">
+	<h1><center><i>BMI Calculation<i></center></h1>
+<center>
+	<div id="app">
+		<div class="form-group">
+			<h3><b>Your Weights</b></h3>
+			<label><b>Pounds:</b></label>
+			<input type="text" name="weight" id="weight" v-model="weight" style="height: 20px;">
+
+		</div><br>
+		<h3>Yout Heights</h3>
+		<div class="form-group"> 
+
+
+			<label><b>Feets:</b></label>
+			<input type="number" class="form-control" v-model="feets" style="height: 20px;">
+		</div><br>
+		<div class="form-group">
+			<label><b>Inches:</b></label>
+			<input type="number" class="form-control" v-model="inches" style="height: 20px;">
+		</div>
+		<br>
+		
+		<button type="btn" v-on:click="calculation">Calculate</button><br><br>
+		<label for="bmi"><b>Your BMI:</b></label>
+		<input style="height: 20px;" id="bmi" v-model="bmi"><br><br>
+
+		<div class="color" style="display: flex">
+			
+			<button style="background-color: blue">Underweight=<18.5</button>
+			<button style="background-color: green">Normal weight=18.5-25</button>
+			<button style="background-color: yellow">Overweight=25-30</button>
+			<button style="background-color: red">Obesity=30 or greater</button> 
+		
+		</div>
+</div><br>
+</center>
+</fieldset>
+
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#app',
+		data: {
+			feets: '',
+			inches: '',
+			weight: '',
+			bmi: ''
+		},
+		methods: {
+			calculation: function() {
+				var feets = parseInt(this.feets);
+				var inch1 = parseInt(this.inches);
+				var inch2 = parseInt(this.feets)*12;
+				var height = inch1+inch2;
+				var weight = parseInt(this.weight);
+				var total = ((weight/(height * height))*703).toFixed(1);
+				this.bmi = total;
+				if(total < 18.5) {
+					$('#bmi').css('background-color','blue');
+				}else if(total>=18.5 && total<24.9){
+					$('#bmi').css('background-color','green');
+				}else if(total>=25 && total<29.9){
+					$('#bmi').css('background-color','yellow');
+
+				}else{
+					$('#bmi').css('background-color','red');
+
+
+				}
+
+			}
+		}
+	})
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+</body>
+</html>
